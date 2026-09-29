@@ -8,8 +8,8 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	gatewayapiv1 "sigs.k8s.io/gateway-api/apis/v1"
 
-	"github.com/kuadrant/kuadrant-operator/cmd/extensions/threat-policy/api/v1alpha1"
-	"github.com/kuadrant/kuadrant-operator/cmd/extensions/threat-policy/internal/controller"
+	"github.com/kuadrant/example-extensions/threat-policy/api/v1alpha1"
+	"github.com/kuadrant/example-extensions/threat-policy/internal/controller"
 	extcontroller "github.com/kuadrant/kuadrant-operator/pkg/extension/controller"
 )
 
