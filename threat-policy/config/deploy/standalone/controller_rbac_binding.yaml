@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: threat-policy-manager-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: threat-policy-manager-role
+subjects:
+  - kind: ServiceAccount
+    name: threat-policy
+    namespace: threat-policy-system

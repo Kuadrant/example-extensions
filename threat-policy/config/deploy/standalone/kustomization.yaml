@@ -1,0 +1,14 @@
+# Standalone deployment of the threat-policy extension: it runs as its own
+# workload with its own ServiceAccount and authenticates to the operator with a
+# projected ServiceAccount token.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../crd
+  - ../../rbac
+  - namespace.yaml
+  - service_account.yaml
+  - controller_rbac_binding.yaml
+  - register_rbac.yaml
+  - deployment.yaml
+  - networkpolicy.yaml
