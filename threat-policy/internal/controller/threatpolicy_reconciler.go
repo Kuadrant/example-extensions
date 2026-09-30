@@ -13,8 +13,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 	gwapiv1 "sigs.k8s.io/gateway-api/apis/v1"
 
-	"github.com/kuadrant/kuadrant-operator/cmd/extensions/threat-policy/api/v1alpha1"
-	"github.com/kuadrant/kuadrant-operator/internal/kuadrant"
+	"github.com/kuadrant/example-extensions/threat-policy/api/v1alpha1"
 	extcontroller "github.com/kuadrant/kuadrant-operator/pkg/extension/controller"
 	"github.com/kuadrant/kuadrant-operator/pkg/extension/types"
 )
@@ -89,7 +88,7 @@ func (r *ThreatPolicyReconciler) validateTarget(ctx context.Context, pol *v1alph
 
 	if err := r.Client.Get(ctx, nn, obj); err != nil {
 		if errors.IsNotFound(err) {
-			return kuadrant.NewErrTargetNotFound("ThreatPolicy", ref.LocalPolicyTargetReference, err)
+			return NewErrTargetNotFound("ThreatPolicy", ref.LocalPolicyTargetReference, err)
 		}
 		return err
 	}
