@@ -1,0 +1,26 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: threat-policy-register
+rules:
+  - apiGroups:
+      - extensions.kuadrant.io
+    resources:
+      - policyregistrations
+    resourceNames:
+      - ThreatPolicy
+    verbs:
+      - register
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: threat-policy-register-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: threat-policy-register
+subjects:
+  - kind: ServiceAccount
+    name: threat-policy
+    namespace: threat-policy-system

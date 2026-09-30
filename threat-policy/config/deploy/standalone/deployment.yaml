@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: threat-policy
+  namespace: threat-policy-system
+  labels:
+    app: threat-policy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: threat-policy
+  template:
+    metadata:
+      labels:
+        app: threat-policy
+    spec:
+      serviceAccountName: threat-policy
+      containers:
+        - name: extension
+          image: threat-policy:dev
+          env:
+            - name: KUADRANT_EXTENSION_ADDRESS
+              value: kuadrant-operator-extensions.kuadrant-system.svc:50052
+            - name: KUADRANT_EXTENSION_TOKEN_FILE
+              value: /var/run/secrets/kuadrant/token
+          volumeMounts:
+            - name: kuadrant-token
+              mountPath: /var/run/secrets/kuadrant
+              readOnly: true
+      volumes:
+        - name: kuadrant-token
+          projected:
+            sources:
+              - serviceAccountToken:
+                  path: token
+                  audience: kuadrant-extensions
+                  expirationSeconds: 3600
